@@ -3,16 +3,17 @@ import java.util.Scanner;
 
 import models.Pessoa.Pessoa;
 import models.Pessoa.PessoaFisica;
+import models.Pessoa.PessoaJuridica;
 
 public class Aplicacao {
     static Pessoa[] pessoas = new Pessoa[0];
+    static String[] opcoesLogado = {"SAIR", "ABRIR CONTA", "SACAR", "DEPOSITAR", "TRANSFERÊNCIA", "INVESTIR", "CONSULTAR SALDO"};
+    static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) throws Exception {
-		String[] opcoesLogado = {"SAIR", "ABRIR CONTA", "SACAR", "DEPOSITAR", "TRANSFERÊNCIA", "INVESTIR", "CONSULTAR SALDO"};
 		String[] opcoesIniciais = {"SAIR", "CADASTRAR CLIENTE", "LOGIN"};
         
-		Scanner sc = new Scanner(System.in);
-		int opcao = 100;
-        while(opcao!= 0 ){
+		int opcao;
+        do{
             print(opcoesIniciais);
             opcao = sc.nextInt();
             if(opcao<opcoesIniciais.length){
@@ -37,17 +38,19 @@ public class Aplicacao {
                         String nome = sc.nextLine();
                         System.out.println("Digite o CNPJ");
                         String cnpj = sc.nextLine();   
+                        newPessoa(new PessoaJuridica(cnpj, nome));
+                        System.out.println("Cadastro realizado com sucesso\n\n");
                     }
                     break;
                 case 2:
-                //TODO login
+                    login();
                     break;
                     
                 default:
                     printPessoas();
                     break;
             }
-        }
+        } while( opcao != 0);
         sc. close();
 		System.out.println("\n-------------------- FIM ---------------------");
     }
@@ -77,5 +80,27 @@ public class Aplicacao {
         for (Pessoa pessoa : pessoas) {
             System.out.printf("- %s\n", pessoa.getNome());
         }
+    }
+    
+    public static void login() {
+        System.out.println("Digite o CPF/CNPJ: ");
+        sc.nextLine();
+        String cpfCnpj = sc.nextLine();
+        System.out.println(cpfCnpj);
+        for (Pessoa pessoa : pessoas) {
+            if (pessoa.getID().equals(cpfCnpj)) {
+                telaLogin(pessoa);
+            }
+        }
+    }
+
+    public static void telaLogin(Pessoa pessoa) {
+        System.out.println("Bem-vindo! " + pessoa.getNome());
+        System.out.println("-------------------- MENU --------------------");
+        for (int i = 0; i < opcoesLogado.length; i++) {
+            System.out.printf("%02d - %s\n", i, opcoesLogado[i]);
+        }
+        System.out.println("DIGITE A OPÇÃO: ");
+        String opcao = sc.nextLine();
     }
 }
