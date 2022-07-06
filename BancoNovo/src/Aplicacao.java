@@ -12,10 +12,10 @@ public class Aplicacao {
         
 		Scanner sc = new Scanner(System.in);
 		int opcao = 100;
-        print(opcoesIniciais);
         while(opcao!= 0 ){
+            print(opcoesIniciais);
             opcao = sc.nextInt();
-            System.out.printf("Você selecionou a opção: %s", opcoesIniciais[opcao]);
+            System.out.printf("Você selecionou a opção: %s\n", opcoesIniciais[opcao]);
             switch(opcao) {
                 case 1:
                 //TODO cadastrar cliente
@@ -28,6 +28,7 @@ public class Aplicacao {
                         System.out.println("Digite o CPF");
                         String cpf = sc.nextLine();
                         newPessoa(new PessoaFisica(cpf, nome));
+                        System.out.println("Cadastro realizado com sucesso\n\n");
                     }
                     else if(tipo == 2){
                         System.out.println("Digite a razão social");
