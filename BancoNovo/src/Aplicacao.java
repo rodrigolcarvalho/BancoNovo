@@ -44,13 +44,14 @@ public class Aplicacao {
             }
         }
         sc. close();
-		System.out.println("---------------- FIM -------------------");
+		System.out.println("\n-------------------- FIM ---------------------");
     }
 
+    
     public static void print(String[] funcionalidades) {
         System.out.println("-------------------- MENU --------------------");
         for (int i = 0; i < funcionalidades.length; i++) {
-            System.out.printf("%2d - %s\n", i, funcionalidades[i]);
+            System.out.printf("%02d - %s\n", i, funcionalidades[i]);
         }
         System.out.println("DIGITE A OPÇÃO: ");
     }
