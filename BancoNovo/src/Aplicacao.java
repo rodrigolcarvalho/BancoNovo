@@ -15,7 +15,9 @@ public class Aplicacao {
         while(opcao!= 0 ){
             print(opcoesIniciais);
             opcao = sc.nextInt();
-            System.out.printf("Você selecionou a opção: %s\n", opcoesIniciais[opcao]);
+            if(opcao<opcoesIniciais.length){
+                System.out.printf("Você selecionou a opção: %s\n", opcoesIniciais[opcao]);
+            }
             switch(opcao) {
                 case 1:
                 //TODO cadastrar cliente
@@ -40,7 +42,9 @@ public class Aplicacao {
                 case 2:
                 //TODO login
                     break;
+                    
                 default:
+                    printPessoas();
                     break;
             }
         }
@@ -66,5 +70,12 @@ public class Aplicacao {
 
         pessoas = novo;
         System.out.println(Arrays.deepToString(pessoas));
+    }
+
+    public static void printPessoas(){
+        System.out.println("Lista de pessoas: ");
+        for (Pessoa pessoa : pessoas) {
+            System.out.printf("- %s\n", pessoa.getNome());
+        }
     }
 }
