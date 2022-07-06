@@ -15,6 +15,8 @@ public class Aplicacao {
     static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) throws Exception {
 		String[] opcoesIniciais = {"SAIR", "CADASTRAR CLIENTE", "LOGIN"};
+        //teste:
+        newPessoa(new PessoaFisica("017", "Rodrigo"));
         
 		int opcao;
         do{
@@ -76,7 +78,7 @@ public class Aplicacao {
         novo[novo.length-1] = pessoa;
 
         pessoas = novo;
-        System.out.println(Arrays.deepToString(pessoas));
+        // System.out.println(Arrays.deepToString(pessoas));
     }
     public static void newConta(Conta conta){
         Conta[] novo = new Conta[contas.length+1];
@@ -86,7 +88,7 @@ public class Aplicacao {
         novo[novo.length-1] = conta;
         
         contas = novo;
-        System.out.println(Arrays.deepToString(contas));
+        // System.out.println(Arrays.deepToString(contas));
     }
 
     public static void printPessoas(){
@@ -135,9 +137,14 @@ public class Aplicacao {
                 case 6:
                     System.out.println("Saldos de suas contas: ");
                     Conta[] contasDoCliente = BuscaContas.buscaContasPorPessoa(contas, pessoa);
-                    for (Conta conta : contasDoCliente) {
-                        System.out.print("Conta nº " +conta.getNumero() + ": ");
-                        System.out.println(conta.getSaldo());
+                    if(contasDoCliente.length >=1){
+                        for (Conta conta : contasDoCliente) {
+                            System.out.print("Conta nº " +conta.getNumero() + ": ");
+                            System.out.println(conta.getSaldo());
+                        }
+                    }
+                    else {
+                        System.out.println("Contas não encontradas para este cliente");
                     }
                     break;
                     default:

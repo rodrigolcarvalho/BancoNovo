@@ -6,8 +6,7 @@ import models.Pessoa.Pessoa;
  * Conta
  */
 public abstract class Conta {
-    // TODO colocar contador de contas criadas para dar o numero delas
-    int numero_contas = 0;
+    static int numero_contas = 0;
 
     private Pessoa pessoa;
     private Double saldo;
