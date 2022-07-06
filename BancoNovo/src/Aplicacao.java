@@ -87,10 +87,15 @@ public class Aplicacao {
         sc.nextLine();
         String cpfCnpj = sc.nextLine();
         System.out.println(cpfCnpj);
+        boolean achou = false;
         for (Pessoa pessoa : pessoas) {
             if (pessoa.getID().equals(cpfCnpj)) {
                 telaLogin(pessoa);
+                achou = true;
             }
+        }
+        if(!achou) {
+            System.out.println("Cliente não encontrado");
         }
     }
 
