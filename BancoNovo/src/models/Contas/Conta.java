@@ -32,7 +32,7 @@ public abstract class Conta {
     public Boolean sacar(Double valor) {
         if (this.getSaldo() < valor) return false;
 
-        this.saldo += valor;
+        this.saldo -= valor;
         return true;
     }
 
