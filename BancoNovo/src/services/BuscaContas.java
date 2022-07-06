@@ -10,7 +10,7 @@ public class BuscaContas {
     public static Conta[] buscaContasPorPessoa (Conta[] contas, Pessoa pessoa){
         Conta[] contasEncontradas = new Conta[0];
         for (Conta conta : contas) {
-            if(conta.getPessoa().getID().toString() == pessoa.getID().toString()){
+            if(conta.getPessoa()== pessoa){
                 contasEncontradas = newConta(contasEncontradas, conta);
             }
         }
