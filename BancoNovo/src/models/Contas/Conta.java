@@ -39,14 +39,6 @@ public abstract class Conta {
         return true;
     }
 
-
-    public int getNumero_contas() {
-        return this.numero_contas;
-    }
-
-    public void setNumero_contas(int numero_contas) {
-        this.numero_contas = numero_contas;
-    }
     public void setPessoa(Pessoa pessoa) {
         this.pessoa = pessoa;
     }
