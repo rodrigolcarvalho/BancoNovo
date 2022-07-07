@@ -54,4 +54,18 @@ public abstract class Conta {
         this.numero = numero;
     }
 
+    public String getTipo(){
+        if(this instanceof ContaCorrente){
+            return "Conta Corrente";
+        }
+        else if(this instanceof ContaPoupanca){
+            return "Conta Poupança";
+        }
+        else if(this instanceof ContaInvestimento){
+            return "Conta Investimento";
+        }
+        else{
+            return "Tipo indefinido";
+        }
+    }
 }

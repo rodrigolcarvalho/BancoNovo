@@ -16,6 +16,15 @@ public class BuscaContas {
         }
         return contasEncontradas;
     }
+    public static Conta buscaContaPorNumero (Conta[] contas, int numero){
+        
+        for (Conta conta : contas) {
+            if(conta.getNumero()== numero){
+                return conta;
+            }
+        }
+        return null;
+    }
 
     private static Conta[] newConta(Conta[] contas, Conta conta){
         Conta[] novo = new Conta[contas.length+1];
@@ -25,7 +34,6 @@ public class BuscaContas {
         novo[novo.length-1] = conta;
 
         contas = novo;
-        System.out.println(Arrays.deepToString(contas));
         return contas;
     }
 }
