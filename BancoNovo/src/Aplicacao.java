@@ -8,6 +8,7 @@ import models.Pessoa.Pessoa;
 import models.Pessoa.PessoaFisica;
 import models.Pessoa.PessoaJuridica;
 import services.BuscaContas;
+import services.Operacoes;
 
 public class Aplicacao {
     static Pessoa[] pessoas = new Pessoa[0];
@@ -149,60 +150,11 @@ public class Aplicacao {
                     contasDoCliente = BuscaContas.buscaContasPorPessoa(contas, pessoa);
                     break;
                 case 2: //SACAR
-                    System.out.println("---------- SAQUE -----------");
-                    System.out.println("Escolha a conta: ");
-                    contasDoCliente = BuscaContas.buscaContasPorPessoa(contas, pessoa);
-                    if(contasDoCliente.length >=1){
-                        for (Conta conta : contasDoCliente) {
-                            System.out.print(conta.getTipo() + " nº " +conta.getNumero() + ": ");
-                            System.out.println(conta.getSaldo());
-                        }
-                    }
-                    else {
-                        System.out.println("Contas não encontradas para este cliente");
-                        break;
-                    }
-                    num = sc.nextInt();
-                    sc.nextLine();
-                    if(BuscaContas.buscaContaPorNumero(contasDoCliente, num) != null){
-                        System.out.println("Digite o valor desejado: ");
-                        Double valor = sc.nextDouble();
-                        sc.nextLine();
-                        BuscaContas.buscaContaPorNumero(contasDoCliente, num).sacar(valor);
-                        System.out.println("Seu novo saldo é de: "+ BuscaContas.buscaContaPorNumero(contasDoCliente, num).getSaldo());
-                    }
-                    else {
-                        System.out.println("Conta não encontrada");
-                    }
+                    Operacoes.OperacaoSaque(contas, pessoa);
 
                     break;
                 case 3: // DEPOSITAR
-                    System.out.println("---------- DEPÓSITO -----------");
-                    System.out.println("Escolha a conta: ");
-                    contasDoCliente = BuscaContas.buscaContasPorPessoa(contas, pessoa);
-                    if(contasDoCliente.length >=1){
-                        for (Conta conta : contasDoCliente) {
-                            System.out.print(conta.getTipo() + " nº " +conta.getNumero() + ": ");
-                            System.out.println(conta.getSaldo());
-                        }
-                    }
-                    else {
-                        System.out.println("Contas não encontradas para este cliente");
-                        break;
-                    }
-                    num = sc.nextInt();
-                    sc.nextLine();
-                    if(BuscaContas.buscaContaPorNumero(contasDoCliente, num) != null){
-                        System.out.println("Digite o valor desejado: ");
-                        Double valor = sc.nextDouble();
-                        sc.nextLine();
-                        BuscaContas.buscaContaPorNumero(contasDoCliente, num).deposito(valor);
-                        System.out.println("Seu novo saldo é de: "+ BuscaContas.buscaContaPorNumero(contasDoCliente, num).getSaldo());
-                    }
-                    else {
-                        System.out.println("Conta não encontrada");
-                    }
-
+                    Operacoes.OperacaoDeposito(contas, pessoa);
                     break;
                 case 6:
                     System.out.println("---------- SALDOS -----------");
