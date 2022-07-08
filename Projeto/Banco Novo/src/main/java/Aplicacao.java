@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 import models.Contas.Conta;
 import models.Contas.ContaCorrente;
 import models.Contas.ContaInvestimento;
@@ -8,7 +6,9 @@ import models.Pessoa.Pessoa;
 import models.Pessoa.PessoaFisica;
 import models.Pessoa.PessoaJuridica;
 import services.BuscaContas;
-import services.Operacoes;
+import services.tela.Operacoes;
+
+import java.util.Scanner;
 
 public class Aplicacao {
     static Pessoa[] pessoas = new Pessoa[0];
@@ -21,7 +21,7 @@ public class Aplicacao {
         newPessoa(new PessoaFisica("017", "Rodrigo"));
         
 		int opcao;
-        do{
+        do {
             print(opcoesIniciais);
             opcao = sc.nextInt();
             if(opcao<opcoesIniciais.length){
@@ -39,7 +39,6 @@ public class Aplicacao {
                         System.out.println("Digite o CPF");
                         String cpf = sc.nextLine();
                         newPessoa(new PessoaFisica(cpf, nome));
-                        System.out.println("Cadastro realizado com sucesso\n\n");
                     }
                     else if(tipo == 2){
                         System.out.println("Digite a razão social");
@@ -47,7 +46,6 @@ public class Aplicacao {
                         System.out.println("Digite o CNPJ");
                         String cnpj = sc.nextLine();   
                         newPessoa(new PessoaJuridica(cnpj, nome));
-                        System.out.println("Cadastro realizado com sucesso\n\n");
                     }
                     break;
                 case 2:
@@ -80,6 +78,7 @@ public class Aplicacao {
         novo[novo.length-1] = pessoa;
 
         pessoas = novo;
+        System.out.println("Cadastro realizado com sucesso\n\n");
         // System.out.println(Arrays.deepToString(pessoas));
     }
     public static void newConta(Conta conta){
@@ -99,7 +98,8 @@ public class Aplicacao {
             System.out.printf("- %s\n", pessoa.getNome());
         }
     }
-    
+
+    // Login pelo CPF ou CNPJ
     public static void login() {
         System.out.println("Digite o CPF/CNPJ: ");
         sc.nextLine();
@@ -108,8 +108,8 @@ public class Aplicacao {
         boolean achou = false;
         for (Pessoa pessoa : pessoas) {
             if (pessoa.getID().equals(cpfCnpj)) {
-                telaLogin(pessoa);
                 achou = true;
+                telaLogin(pessoa);
             }
         }
         if(!achou) {
@@ -118,11 +118,10 @@ public class Aplicacao {
     }
     
     public static void telaLogin(Pessoa pessoa) {
+        System.out.println("Bem-vindo! " + pessoa.getNome());
         String[] opcoesLogado = {"SAIR", "ABRIR CONTA", "SACAR", "DEPOSITAR", "TRANSFERÊNCIA", "INVESTIR", "CONSULTAR SALDO"};
-        int opcao; 
-        int num;
-        do{
-            System.out.println("Bem-vindo! " + pessoa.getNome());
+        int opcao;
+        do {
             print(opcoesLogado);
             opcao = sc.nextInt();
             sc.nextLine();
@@ -131,39 +130,40 @@ public class Aplicacao {
                 case 0:
                     break;
                 case 1:
-                    System.out.println("Digite: \n 1 para nova conta corrente");
-                    if(pessoa instanceof PessoaFisica){
-                        System.out.println(" 2 para nova conta poupança");
+                    System.out.println("Digite: \n 1- para nova conta corrente");
+                    System.out.println(" 2- para conta investimento");
+                    if(pessoa instanceof PessoaFisica) {
+                        System.out.println(" 3- para nova conta poupança");
                     }
-                    System.out.println(" 3 para conta investimento");
                     int tipo = sc.nextInt();
                     sc.nextLine();
                     if(tipo == 1){
                         newConta(new ContaCorrente(pessoa));
+                        System.out.println("Conta Corrente criada com sucesso!");
                     }
                     else if (tipo == 2){
-                        newConta(new ContaPoupanca(pessoa));
+                        newConta(new ContaInvestimento(pessoa));
+                        System.out.println("Conta Investimento criada com sucesso!");
                     }
                     else if (tipo == 3){
-                        newConta(new ContaInvestimento(pessoa));
+                        newConta(new ContaPoupanca(pessoa));
+                        System.out.println("Conta Poupança criada com sucesso!");
                     }
-                    contasDoCliente = BuscaContas.buscaContasPorPessoa(contas, pessoa);
                     break;
                 case 2: //SACAR
-                    Operacoes.OperacaoSaque(contas, pessoa);
+                    Operacoes.operacaoSaque(contasDoCliente);
 
                     break;
                 case 3: // DEPOSITAR
-                    Operacoes.OperacaoDeposito(contas, pessoa);
+                    Operacoes.operacaoDeposito(contasDoCliente);
                     break;
                 case 6:
                     System.out.println("---------- SALDOS -----------");
                     System.out.println("Saldos de suas contas: ");
                     contasDoCliente = BuscaContas.buscaContasPorPessoa(contas, pessoa);
-                    if(contasDoCliente.length >=1){
+                    if(contasDoCliente != null){
                         for (Conta conta : contasDoCliente) {
-                            System.out.print(conta.getTipo() + " nº " +conta.getNumero() + ": ");
-                            System.out.println(conta.getSaldo());
+                            conta.imprimirSaldo();
                         }
                     }
                     else {

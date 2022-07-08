@@ -10,6 +10,4 @@ public class ContaCorrente extends ContaMovimentacao {
     public ContaCorrente(Pessoa pessoa) {
         super(pessoa);
     }
-
-    
 }

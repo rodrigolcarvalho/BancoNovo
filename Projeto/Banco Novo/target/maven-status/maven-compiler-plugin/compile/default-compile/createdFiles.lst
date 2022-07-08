@@ -1,0 +1,12 @@
+models\Pessoa\Perfil.class
+models\Pessoa\PessoaJuridica.class
+services\BuscaContas.class
+Aplicacao.class
+models\Contas\Conta.class
+models\Pessoa\PessoaFisica.class
+models\Pessoa\Pessoa.class
+services\Operacoes.class
+models\Contas\ContaPoupanca.class
+models\Contas\ContaCorrente.class
+models\Contas\ContaInvestimento.class
+models\Contas\ContaMovimentacao.class

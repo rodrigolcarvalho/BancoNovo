@@ -1,7 +1,5 @@
 package services;
 
-import java.util.Arrays;
-
 import models.Contas.Conta;
 import models.Pessoa.Pessoa;
 
@@ -10,11 +8,11 @@ public class BuscaContas {
     public static Conta[] buscaContasPorPessoa (Conta[] contas, Pessoa pessoa){
         Conta[] contasEncontradas = new Conta[0];
         for (Conta conta : contas) {
-            if(conta.getPessoa()== pessoa){
+            if(conta.getPessoa() == pessoa){
                 contasEncontradas = newConta(contasEncontradas, conta);
             }
         }
-        return contasEncontradas;
+        return contasEncontradas.length > 0 ? contasEncontradas : null;
     }
     public static Conta buscaContaPorNumero (Conta[] contas, int numero){
         
@@ -26,12 +24,10 @@ public class BuscaContas {
         return null;
     }
 
-    private static Conta[] newConta(Conta[] contas, Conta conta){
+    private static Conta[] newConta(Conta[] contas, Conta adicionarConta){
         Conta[] novo = new Conta[contas.length+1];
-        for (int i = 0; i < contas.length; i++) {
-            novo[i] = contas[i];
-        }
-        novo[novo.length-1] = conta;
+        System.arraycopy(contas, 0, novo, 0, contas.length);
+        novo[contas.length] = adicionarConta;
 
         contas = novo;
         return contas;

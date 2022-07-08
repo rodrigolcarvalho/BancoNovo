@@ -1,7 +1,7 @@
 package models.Pessoa;
 
 public class PessoaFisica extends Pessoa{
-    private String cpf;
+    private final String cpf;
 
     public PessoaFisica(String cpf, String nome) {
         super(nome);
@@ -13,4 +13,10 @@ public class PessoaFisica extends Pessoa{
         return this.cpf;
     }
 
+    @Override
+    public String toString() {
+        return "PessoaFisica{" +
+                "cpf='" + cpf + '\'' +
+                '}';
+    }
 }

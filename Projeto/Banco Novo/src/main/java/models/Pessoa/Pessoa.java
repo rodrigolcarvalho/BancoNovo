@@ -32,9 +32,8 @@ public abstract class Pessoa {
 
     @Override
     public String toString() {
-        return "{" +
-            " nome='" + getNome() + "'" +
-            "}";
+        return "Pessoa{" +
+                "nome='" + nome + '\'' +
+                '}';
     }
-
 }

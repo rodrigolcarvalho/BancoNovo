@@ -29,4 +29,12 @@ public class Perfil {
         this.adicionalInvestimento = adicionalInvestimento;
     }
 
+    @Override
+    public String toString() {
+        return "Perfil{" +
+                "taxaSaque=" + taxaSaque +
+                ", taxaDeposito=" + taxaDeposito +
+                ", adicionalInvestimento=" + adicionalInvestimento +
+                '}';
+    }
 }

@@ -1,7 +1,7 @@
 package models.Pessoa;
 
 public class PessoaJuridica extends Pessoa {
-    private String cnpj;
+    private final String cnpj;
 
     public PessoaJuridica(String cnpj, String nome) {
         super(nome);
@@ -18,5 +18,12 @@ public class PessoaJuridica extends Pessoa {
     @Override
     public String getID() {
         return this.getCnpj();
+    }
+
+    @Override
+    public String toString() {
+        return "PessoaJuridica{" +
+                "cnpj='" + cnpj + '\'' +
+                '}';
     }
 }

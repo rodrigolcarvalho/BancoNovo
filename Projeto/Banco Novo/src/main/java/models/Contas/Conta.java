@@ -55,17 +55,31 @@ public abstract class Conta {
     }
 
     public String getTipo(){
-        if(this instanceof ContaCorrente){
+        if(this instanceof ContaCorrente) {
             return "Conta Corrente";
         }
-        else if(this instanceof ContaPoupanca){
+        else if(this instanceof ContaPoupanca) {
             return "Conta Poupança";
         }
-        else if(this instanceof ContaInvestimento){
+        else if(this instanceof ContaInvestimento) {
             return "Conta Investimento";
         }
-        else{
+        else {
             return "Tipo indefinido";
         }
+    }
+
+    @Override
+    public String toString() {
+        return getTipo()+"{"+
+                "pessoa=" + pessoa +
+                ", saldo=" + saldo +
+                ", numero=" + numero +
+                '}';
+    }
+
+    public void imprimirSaldo() {
+        System.out.print(this.getTipo() + " nº: " + this.getNumero());
+        System.out.println(" Saldo: R$ " + this.getSaldo());
     }
 }
