@@ -16,12 +16,12 @@ public class Operacoes {
 
         Scanner sc = new Scanner(System.in);
         System.out.println("---------- SAQUE -----------");
-        System.out.println("Escolha a conta: ");
+        System.out.println("Digite o número da conta: ");
         for (Conta conta : contasDoCliente) {
             conta.imprimirSaldo();
         }
         int num = sc.nextInt();
-        sc.next();
+        sc.nextLine();
         Conta contaSelecionada = BuscaContas.buscaContaPorNumero(contasDoCliente, num);
         if (contaSelecionada != null) {
             if (contaSelecionada.getSaldo() > 0) {
@@ -41,6 +41,7 @@ public class Operacoes {
         else {
             System.out.println("Conta não encontrada");
         }
+        sc.close();
 
     }
     public static void operacaoDeposito(Conta[] contasDoCliente){
@@ -51,12 +52,12 @@ public class Operacoes {
 
         Scanner sc = new Scanner(System.in);
         System.out.println("---------- DEPÓSITO -----------");
-        System.out.println("Escolha a conta: ");
+        System.out.println("Digite o número da conta: ");
         for (Conta conta : contasDoCliente) {
             conta.imprimirSaldo();
         }
         int num = sc.nextInt();
-        sc.next();  // tinha um nextLine
+        sc.nextLine(); 
         Conta contaSelecionada = BuscaContas.buscaContaPorNumero(contasDoCliente, num);
         if(contaSelecionada != null){
             System.out.println("Digite o valor desejado: ");
@@ -68,6 +69,6 @@ public class Operacoes {
         else {
             System.out.println("Conta não encontrada");
         }
-
+        sc.close();
     }
 }

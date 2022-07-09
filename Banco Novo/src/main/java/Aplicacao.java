@@ -38,14 +38,25 @@ public class Aplicacao {
                         String nome = sc.nextLine();
                         System.out.println("Digite o CPF");
                         String cpf = sc.nextLine();
-                        newPessoa(new PessoaFisica(cpf, nome));
+                        Pessoa pessoa = pessoaJaExiste(pessoas, cpf);
+                        if (pessoa != null) {
+                            System.out.println("Você já realizou o cadastro " + pessoa.getNome() + " e será redirecionado ao login");
+                            telaLogin(pessoa);
+                        } else {
+                            newPessoa(new PessoaFisica(cpf, nome));
+                        }
                     }
                     else if(tipo == 2){
                         System.out.println("Digite a razão social");
                         String nome = sc.nextLine();
                         System.out.println("Digite o CNPJ");
-                        String cnpj = sc.nextLine();   
-                        newPessoa(new PessoaJuridica(cnpj, nome));
+                        String cnpj = sc.nextLine();
+                        Pessoa pessoa = pessoaJaExiste(pessoas, cnpj);
+                        if (pessoa != null) {
+                            System.out.println("Você já realizou o cadastro " + pessoa.getNome() + " e será redirecionado ao login");
+                        } else {
+                            newPessoa(new PessoaJuridica(cnpj, nome));
+                        }
                     }
                     break;
                 case 2:
@@ -81,6 +92,16 @@ public class Aplicacao {
         System.out.println("Cadastro realizado com sucesso\n\n");
         // System.out.println(Arrays.deepToString(pessoas));
     }
+
+    public static Pessoa pessoaJaExiste(Pessoa[] pessoas, String cpfCnpj) {
+        Pessoa pessoa = null;
+        for (int i = 0; i < pessoas.length; i++) {
+            if (pessoas[i].getID().equals(cpfCnpj))
+                pessoa = pessoas[i];
+        }
+        return pessoa;
+    }
+
     public static void newConta(Conta conta){
         Conta[] novo = new Conta[contas.length+1];
         for (int i = 0; i < contas.length; i++) {
@@ -145,7 +166,7 @@ public class Aplicacao {
                         newConta(new ContaInvestimento(pessoa));
                         System.out.println("Conta Investimento criada com sucesso!");
                     }
-                    else if (tipo == 3){
+                    else if (tipo == 3 && pessoa instanceof PessoaFisica){
                         newConta(new ContaPoupanca(pessoa));
                         System.out.println("Conta Poupança criada com sucesso!");
                     }
