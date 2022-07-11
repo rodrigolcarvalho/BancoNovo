@@ -1,14 +1,18 @@
 package services.tela;
 
-
 import models.Contas.Conta;
-import services.BuscaContas;
+import services.GerenciadorContas;
 
 import java.util.Scanner;
 
+
 public class Operacoes {
 
+    private static GerenciadorContas gerenteContas;
+
     public static void operacaoSaque(Conta[] contasDoCliente){
+        gerenteContas = GerenciadorContas.getInstance();
+
         if (contasDoCliente == null) {
             System.out.println("Não foi possível sacar, porque o cliente não tem conta");
             return;
@@ -22,7 +26,7 @@ public class Operacoes {
         }
         int num = sc.nextInt();
         sc.nextLine();
-        Conta contaSelecionada = BuscaContas.buscaContaPorNumero(contasDoCliente, num);
+        Conta contaSelecionada = gerenteContas.getContaPorNumero(contasDoCliente, num);
         if (contaSelecionada != null) {
             if (contaSelecionada.getSaldo() > 0) {
                 System.out.println("Digite o valor desejado: ");
@@ -57,7 +61,7 @@ public class Operacoes {
         }
         int num = sc.nextInt();
         sc.nextLine(); 
-        Conta contaSelecionada = BuscaContas.buscaContaPorNumero(contasDoCliente, num);
+        Conta contaSelecionada = gerenteContas.getContaPorNumero(contasDoCliente, num);
         if(contaSelecionada != null){
             System.out.println("Digite o valor desejado: ");
             Double valor = sc.nextDouble();

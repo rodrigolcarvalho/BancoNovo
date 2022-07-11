@@ -17,6 +17,7 @@ class BuscaContasTest {
     static PessoaJuridica pj1;
     static Conta conta1, conta2;
     static Conta[] contas;
+    static GerenciadorContas gerenteContas;
 
     @BeforeAll
     static void inicializar() {
@@ -33,11 +34,14 @@ class BuscaContasTest {
                         new ContaPoupanca(pj1),
                         new ContaPoupanca(pf2)
                 };
+        gerenteContas = GerenciadorContas.getInstance();
+        for (Conta conta : contas) 
+            gerenteContas.adicionarConta(conta);
     }
 
     @Test
     void sucessoEncontraContaPorPessoaTest() {
-        Conta[] encontradas = BuscaContas.buscaContasPorPessoa(contas, pf1);
+        Conta[] encontradas = gerenteContas.getContasPorPessoa(pf1);
         Conta[] resposta = new Conta[]{conta2, conta1};
 
         boolean existe = false;
@@ -47,7 +51,7 @@ class BuscaContasTest {
 
     @Test
     void semContaNoEncontraContaPorPessoaTest() {
-        Conta[] encontradas = BuscaContas.buscaContasPorPessoa(contas, new PessoaFisica("1", "LALA"));
+        Conta[] encontradas = gerenteContas.getContasPorPessoa(new PessoaFisica("1", "LALA"));
         assertNull(encontradas);
     }
 
@@ -59,13 +63,13 @@ class BuscaContasTest {
 
     @Test
     void sucessoEncontraContaPorNumeroTest() {
-        Conta conta = BuscaContas.buscaContaPorNumero(contas, contas[1].getNumero());
+        Conta conta = gerenteContas.getContaPorNumero(contas, contas[1].getNumero());
         assertEquals(conta, contas[1]);
     }
 
     @Test
     void semContaNoEncontraContaPorNumeroTest() {
-        Conta encontrada = BuscaContas.buscaContaPorNumero(contas, -1);
+        Conta encontrada = gerenteContas.getContaPorNumero(contas, -1);
         assertNull(encontrada);
     }
 }

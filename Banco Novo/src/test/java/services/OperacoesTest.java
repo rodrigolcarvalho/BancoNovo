@@ -16,17 +16,22 @@ class OperacoesTest {
     static PessoaFisica pf1;
     static PessoaJuridica pj1;
     static Conta[] contas;
+    static GerenciadorContas gerenteContas;
 
     @BeforeAll
     static void inicializar() {
         pf1 = new PessoaFisica("123", "TestePF");
         pj1 = new PessoaJuridica("456", "TestePJ");
         contas = new Conta[]{new ContaInvestimento(pf1), new ContaCorrente(pj1)};
+        gerenteContas = GerenciadorContas.getInstance();
+        for (Conta conta : contas) {
+            gerenteContas.adicionarConta(conta);
+        }
     }
 
     @Test
     void saqueSucessoTest() {
-        Conta c1 = BuscaContas.buscaContasPorPessoa(contas, pf1)[0];
+        Conta c1 = gerenteContas.getContasPorPessoa(pf1)[0];
         double saldoInicial = c1.getSaldo();
 
         double valor = 100.;
@@ -40,7 +45,7 @@ class OperacoesTest {
 
     @Test
     void depositoSucessoTest() {
-        Conta c1 = BuscaContas.buscaContasPorPessoa(contas, pj1)[0];
+        Conta c1 = gerenteContas.getContasPorPessoa(pj1)[0];
         double saldoInicial = c1.getSaldo();
 
         double valor = 100.;
