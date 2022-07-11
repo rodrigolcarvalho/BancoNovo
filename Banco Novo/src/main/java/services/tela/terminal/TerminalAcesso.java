@@ -101,5 +101,4 @@ public class TerminalAcesso extends Terminal {
 
         gerenteTela.irParaTelaLogin(pessoa);
     }
-    
 }

@@ -20,18 +20,17 @@ public class Operacoes {
 
         Scanner sc = new Scanner(System.in);
         System.out.println("---------- SAQUE -----------");
-        System.out.println("Digite o número da conta: ");
         for (Conta conta : contasDoCliente) {
             conta.imprimirSaldo();
         }
+        System.out.println("Digite o número da conta: ");
         int num = sc.nextInt();
-        sc.nextLine();
+       
         Conta contaSelecionada = gerenteContas.getContaPorNumero(contasDoCliente, num);
         if (contaSelecionada != null) {
             if (contaSelecionada.getSaldo() > 0) {
                 System.out.println("Digite o valor desejado: ");
                 Double valor = sc.nextDouble();
-                sc.nextLine();
                 boolean sucesso = contaSelecionada.sacar(valor);
                 if (sucesso)
                     System.out.println("Seu novo saldo é de: " + contaSelecionada.getSaldo());
@@ -55,17 +54,16 @@ public class Operacoes {
 
         Scanner sc = new Scanner(System.in);
         System.out.println("---------- DEPÓSITO -----------");
-        System.out.println("Digite o número da conta: ");
         for (Conta conta : contasDoCliente) {
             conta.imprimirSaldo();
         }
+        System.out.println("Digite o número da conta: ");
         int num = sc.nextInt();
-        sc.nextLine(); 
+
         Conta contaSelecionada = gerenteContas.getContaPorNumero(contasDoCliente, num);
         if(contaSelecionada != null){
             System.out.println("Digite o valor desejado: ");
             Double valor = sc.nextDouble();
-            sc.nextLine();
             contaSelecionada.deposito(valor);
             System.out.println("Seu novo saldo é de: "+ contaSelecionada.getSaldo());
         }
@@ -84,27 +82,25 @@ public class Operacoes {
 
         Scanner sc = new Scanner(System.in);
         System.out.println("---------- TRANSFREIR -----------");
-        System.out.print("Digite o número da conta da qual deseja transferir: ");
         for (Conta conta : contasDoCliente) {
             conta.imprimirSaldo();
         }
+        System.out.print("Digite o número da conta da qual deseja transferir: ");
         int numContaOrigem = sc.nextInt();
-        sc.nextLine();
         Conta contaOrigem = gerenteContas.getContaPorNumero(contasDoCliente, numContaOrigem);
         if (contaOrigem != null) {
-            System.out.print("Digite o número da conta para qual deseja transferir: \n");
+            System.out.print("Digite o número da conta para qual deseja transferir:");
             int numContaDestino = sc.nextInt();
-            sc.nextLine();
+
             Conta contaDestino = gerenteContas.getContaPorNumero(numContaDestino);
             if(contaDestino != null){
                 System.out.printf("Transferir para %s, conta %d \n", contaDestino.getPessoa().getNome(), contaDestino.getNumero());
-                System.out.println("Digite o valor a transferir: ");
+                System.out.print("Digite o valor a transferir: ");
                 Double valor = sc.nextDouble();
                 if (valor > contaOrigem.getSaldo()) {
                     System.out.println("Saldo insuficiente.");
                     return;
                 }
-                sc.nextLine();
                 contaDestino.deposito(valor);
                 contaOrigem.sacar(valor);
                 System.out.println("Seu novo saldo é de: "+ contaOrigem.getSaldo());
@@ -116,6 +112,4 @@ public class Operacoes {
             System.out.println("Conta não encontrada.");
         }
     }
-
-    
 }

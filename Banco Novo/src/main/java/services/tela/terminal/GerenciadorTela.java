@@ -22,13 +22,13 @@ public class GerenciadorTela {
     private GerenciadorContas gerenteContas;
     private Scanner sc = new Scanner(System.in);
     private Terminal terminal;
+    private int opcao = -1;
 
     public void criarTela(){
         gerenteContas = GerenciadorContas.getInstance();
         
         terminal = new TerminalAcesso();
 
-		int opcao = -1;
         do {
             try {
                 terminal.print();
@@ -48,5 +48,10 @@ public class GerenciadorTela {
         System.out.println("Bem-vindo! " + pessoa.getNome());
         Conta[] contasDoCliente = gerenteContas.getContasPorPessoa(pessoa);
         terminal = new TerminalCliente(pessoa, contasDoCliente);
+    }
+
+    public void irParaTelaAcesso() {
+        terminal = new TerminalAcesso();
+        opcao = -1;
     }
 }

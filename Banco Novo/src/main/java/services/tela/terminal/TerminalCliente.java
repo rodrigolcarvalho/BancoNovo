@@ -17,6 +17,7 @@ public class TerminalCliente extends Terminal{
     private GerenciadorContas gerenteContas;
     private Scanner sc = new Scanner(System.in);
     private Pessoa pessoa;
+    private GerenciadorTela gerenciadorTela;
 
     public TerminalCliente(Pessoa pessoa, Conta[] contasDoCliente) {
         super(new String[]{"SAIR", "ABRIR CONTA", "SACAR", "DEPOSITAR", "TRANSFERÊNCIA", "INVESTIR", "CONSULTAR SALDO"});
@@ -24,12 +25,14 @@ public class TerminalCliente extends Terminal{
         this.contasDoCliente = contasDoCliente;
         this.pessoa = pessoa;
         gerenteContas = GerenciadorContas.getInstance();
+        gerenciadorTela = GerenciadorTela.getInstance();
     }
 
     @Override
     public void selecionarOpcao(int opcao) {
         switch(opcao) {
             case 0:
+                gerenciadorTela.irParaTelaAcesso();
                 break;
             case 1:
                 System.out.println("Digite: \n 1- para nova conta corrente");
@@ -56,11 +59,16 @@ public class TerminalCliente extends Terminal{
                 break;
             case 2: //SACAR
                 Operacoes.operacaoSaque(contasDoCliente);
-
                 break;
+
             case 3: // DEPOSITAR
                 Operacoes.operacaoDeposito(contasDoCliente);
                 break;
+                
+            case 4: // TRANSFERIR
+                Operacoes.operacaoTransferir(contasDoCliente);
+                break;
+
             case 6:
                 System.out.println("---------- SALDOS -----------");
                 System.out.println("Saldos de suas contas: ");
