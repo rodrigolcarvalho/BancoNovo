@@ -41,7 +41,6 @@ public class Operacoes {
         else {
             System.out.println("Conta não encontrada");
         }
-        sc.close();
 
     }
     public static void operacaoDeposito(Conta[] contasDoCliente){
@@ -69,6 +68,5 @@ public class Operacoes {
         else {
             System.out.println("Conta não encontrada");
         }
-        sc.close();
     }
 }
