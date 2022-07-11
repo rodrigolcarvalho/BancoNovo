@@ -45,8 +45,8 @@ public class Operacoes {
         else {
             System.out.println("Conta não encontrada");
         }
-
     }
+
     public static void operacaoDeposito(Conta[] contasDoCliente){
         if (contasDoCliente == null) {
             System.out.println("Não foi possível depositar, porque o cliente não tem conta");
