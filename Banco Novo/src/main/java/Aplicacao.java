@@ -128,10 +128,10 @@ public class Aplicacao {
                 case 0:
                     break;
                 case 1:
-                    System.out.println("Digite: \n 1- para nova conta corrente");
-                    System.out.println(" 2- para conta investimento");
+                    System.out.println("Digite: \n 01 - para nova conta corrente");
+                    System.out.println(" 02 - para conta investimento");
                     if(pessoa instanceof PessoaFisica) {
-                        System.out.println(" 3- para nova conta poupança");
+                        System.out.println(" 03 - para nova conta poupança");
                     }
                     int tipo = sc.nextInt();
                     sc.nextLine();
@@ -154,6 +154,9 @@ public class Aplicacao {
                     break;
                 case 3: // DEPOSITAR
                     Operacoes.operacaoDeposito(contasDoCliente);
+                    break;
+                case 4:
+                    Operacoes.operacaoTransferir(contasDoCliente);
                     break;
                 case 6:
                     System.out.println("---------- SALDOS -----------");
