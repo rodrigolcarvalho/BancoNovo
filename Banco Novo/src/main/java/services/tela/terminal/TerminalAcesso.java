@@ -50,8 +50,6 @@ public class TerminalAcesso extends Terminal {
 
         Pessoa pessoa = null;
         if(tipo == 1){
-            System.out.println("Digite o nome");
-            String nome = sc.nextLine();
             System.out.println("Digite o CPF");
             String cpf = sc.nextLine();
 
@@ -62,13 +60,14 @@ public class TerminalAcesso extends Terminal {
                 
                 gerenteTela.irParaTelaLogin(pessoa);
                 return;
-            } 
+            }
+
+            System.out.println("Digite o nome");
+            String nome = sc.nextLine();
 
             gerentePessoas.adicionarPessoa(new PessoaFisica(cpf, nome));
 
         }else if(tipo == 2){
-            System.out.println("Digite a razão social");
-            String nome = sc.nextLine();
             System.out.println("Digite o CNPJ");
             String cnpj = sc.nextLine();
 
@@ -78,7 +77,10 @@ public class TerminalAcesso extends Terminal {
                 System.out.println("Você já realizou o cadastro " + pessoa.getNome() + " e será redirecionado ao login");
                 gerenteTela.irParaTelaLogin(pessoa);
                 return;
-            } 
+            }
+
+            System.out.println("Digite a razão social");
+            String nome = sc.nextLine();
 
             gerentePessoas.adicionarPessoa(new PessoaJuridica(cnpj, nome));
         }
