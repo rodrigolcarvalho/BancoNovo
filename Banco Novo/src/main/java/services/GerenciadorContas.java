@@ -51,6 +51,15 @@ public class GerenciadorContas {
         return contasEncontradas.length > 0 ? contasEncontradas : null;
     }
 
+    public Conta[] getContasPorTipo(Conta[] contas, Class classeConta) {
+        Conta[] contasEncontradas = new Conta[0];
+        for (Conta conta : contas) {
+            if(conta.getClass() == classeConta){
+                contasEncontradas = appendConta(contasEncontradas, conta);
+            }
+        }
+        return contasEncontradas.length > 0 ? contasEncontradas : null;
+    }
 
     private Conta[] appendConta(Conta[] contas, Conta novaConta){
         int length = contas.length;
@@ -58,4 +67,6 @@ public class GerenciadorContas {
         novo[length] = novaConta;
         return novo;
     }
+
+
 }

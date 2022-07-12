@@ -35,10 +35,10 @@ public class TerminalCliente extends Terminal{
                 gerenciadorTela.irParaTelaAcesso();
                 break;
             case 1:
-                System.out.println("Digite: \n 1- para nova conta corrente");
-                System.out.println(" 2- para conta investimento");
+                System.out.println("Digite: \n 1- para abrir nova conta corrente");
+                System.out.println(" 2- para abrir conta investimento");
                 if(pessoa instanceof PessoaFisica) {
-                    System.out.println(" 3- para nova conta poupança");
+                    System.out.println(" 3- para abrir nova conta poupança");
                 }
                 int tipo = sc.nextInt();
                 sc.nextLine();
@@ -68,7 +68,9 @@ public class TerminalCliente extends Terminal{
             case 4: // TRANSFERIR
                 Operacoes.operacaoTransferir(contasDoCliente);
                 break;
-
+            case 5: // INVESTIR
+                Operacoes.operacaoInvestir(contasDoCliente);
+                break;
             case 6:
                 System.out.println("---------- SALDOS -----------");
                 System.out.println("Saldos de suas contas: ");
