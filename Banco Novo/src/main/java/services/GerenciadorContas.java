@@ -54,7 +54,7 @@ public class GerenciadorContas {
     public Conta[] getContasPorTipo(Conta[] contas, Class classeConta) {
         Conta[] contasEncontradas = new Conta[0];
         for (Conta conta : contas) {
-            if(conta.getClass() == classeConta){
+            if(classeConta.isInstance(conta)){
                 contasEncontradas = appendConta(contasEncontradas, conta);
             }
         }
