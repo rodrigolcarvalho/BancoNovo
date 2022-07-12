@@ -3,9 +3,12 @@ package services.tela;
 import models.Contas.Conta;
 import models.Contas.ContaInvestimento;
 import models.Contas.ContaMovimentacao;
+import models.Contas.ContaPoupanca;
 import services.GerenciadorContas;
 
 import java.util.Scanner;
+
+import interfaces.Rentavel;
 
 
 public class Operacoes {
@@ -121,25 +124,40 @@ public class Operacoes {
 
     public static void operacaoInvestir(Conta[] contasDoCliente) {
         gerenteContas = GerenciadorContas.getInstance();
-        
+        Conta[] contasInvestiveis = gerenteContas.getContasPorTipo(contasDoCliente, Rentavel.class);
         // Conta[] contasInvestimentoDoCliente = gerenteContas.getContasPorTipo(contasDoCliente, ContaInvestimento.class);
         
-        if (contasDoCliente == null) {
+        if (contasInvestiveis == null) {
             System.out.println("Não é possível investir, porque o cliente não tem conta investimento");
             return;
         }
 
         Scanner sc = new Scanner(System.in);
         System.out.println("---------- INVESTIR -----------");
-        for (Conta conta : contasDoCliente) {
+        for (Conta conta : contasInvestiveis) {
             conta.imprimirSaldo();
         }
         System.out.print("Digite o número da conta que deseja investir: ");
-        // int numContaOrigem = sc.nextInt();
-        // Conta contaOrigem = gerenteContas.getContaPorNumero(contasInvestimentoDoCliente, numContaOrigem);
-        // if (contaOrigem != null) {
-        //     System.out.print("Digite o número da conta para qual deseja transferir:");
-        //     int numContaDestino = sc.nextInt();
+        int num = sc.nextInt();
+        Conta contaInvestimento = gerenteContas.getContaPorNumero(contasInvestiveis, num);
+        if (contaInvestimento != null) {
+            System.out.print("Digite um valor para deposito ou digite 'render' para render:");
+            String input = sc.nextLine();
+            if (input.equalsIgnoreCase(new String("render"))) {
+                if (contaInvestimento instanceof ContaInvestimento) {
+                    ContaInvestimento conta = (ContaInvestimento) contaInvestimento;
+                    conta.render();
+                }
+                if (contaInvestimento instanceof ContaPoupanca) {
+                    ContaPoupanca conta = (ContaPoupanca) contaInvestimento;
+                    conta.render();
+                }
+            } else if(!Double.isNaN(Double.parseDouble(input))) {
+                Double valorInvestimento = Double.parseDouble(input);
+                contaInvestimento.deposito(valorInvestimento);
+            } else {
+                System.out.println("Digite uma entrada válida.");
+            }
 
         //     Conta contaDestino = gerenteContas.getContaPorNumero(numContaDestino);
         //     if(contaDestino != null){
@@ -157,9 +175,9 @@ public class Operacoes {
         //     else {
         //         System.out.println("Conta não encontrada");
         //     }
-        // } else {
-        //     System.out.println("Conta não encontrada.");
-        // }
+        } else {
+            System.out.println("Conta não encontrada.");
+        }
  
     }
 }
